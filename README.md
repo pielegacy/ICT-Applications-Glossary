@@ -5,4 +5,4 @@ Allows for definitions to be viewed by categories (a lot like Rippah Quotes) and
 Backend is written in python, using the bottle.py micro-framework. 
 Unlike ASP.Net or even other Python web framworks like Django, bottle.py has no real scaffolding or defined structure
 which means that I essentially wrote this one from scratch. Definitions are stored in an SQLite Database File, this also
-allows for definitions to be added if necessary (localhost:8080/Create).
+allows for definitions to be added if necessary (localhost:8080/create).
