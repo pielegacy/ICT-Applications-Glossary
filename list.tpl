@@ -10,6 +10,7 @@
 			<h1>ICT Glossary</h1>
 			View by :
 			<a class="navlinks" href="concept">Concept</a>
+			<!-- .tpl files allow for python script to be embedded into the webpage -->
 			%count = 0
 			%for term in terms:
 				<div class="define">

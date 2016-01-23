@@ -1,6 +1,6 @@
 from bottle import *
 import sqlite3
-
+#Index
 @route('/')
 @route('/terms')
 def getgloss():
@@ -8,6 +8,7 @@ def getgloss():
 	terms = []
 	defins = []
 	cats = []
+	#SQLite query using familiar SQL 
 	c = conn.execute("SELECT * from table_definitions")
 	rows = c.fetchall()
 	for row in rows:
@@ -16,8 +17,9 @@ def getgloss():
 		cats.append(row[3])
 	conn.commit()
 	conn.close()
+	#Returns a page using the required template file (.tpl)
 	return template("list", terms=terms, defins=defins, cats=cats)
-
+#List Definitions By Concept
 @route('/category/<name>')
 def getterms(name):
 	conn = sqlite3.connect('glossary.db')
@@ -31,7 +33,7 @@ def getterms(name):
 	conn.commit()
 	conn.close()
 	return template("category", name=name, defins=defins, terms=terms)
-
+#List Concepts
 @route('/concept')
 def concept():
 	conn = sqlite3.connect('glossary.db')
@@ -45,18 +47,19 @@ def concept():
 	conn.close()
 	return template("concept",terms=terms)
 
-
+#Basic Static File Receiver
 @get('/static/<filename>')
 def send_static(filename):
     return static_file(filename, root='static/')
 
-#New Element
+#Create New Definition
 @route('/create')
 def create():
 	return template("create")
-
+#Post Method for Create
 @route('/create', method="POST")
 def success():
+        #Requesting elements from form
 	term = request.forms.get('term')
 	define = request.forms.get('define')
 	cat = request.forms.get('category')
@@ -79,18 +82,14 @@ def success():
 		conn.commit()
 		conn.close()
 		return template("failure")
-
+#CSS Returner
 @get('/main.css')
 def stylesheets():
 	return static_file("main.css", root='static')
-
-@route('/heaven')
-def memes():
-	return redirect("http://www.reddit.com/r/adviceanimals")
-
+#404 Page
 @error(404)
 def error404(error):
-	return "Shit's fucked"
+	return "Oi nah not working aye?"
 
 
 # Debug Run #
