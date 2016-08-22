@@ -17,6 +17,7 @@ def getgloss():
 		cats.append(row[3])
 	conn.commit()
 	conn.close()
+	#ayelmao it works josiah
 	#Returns a page using the required template file (.tpl)
 	return template("list", terms=terms, defins=defins, cats=cats)
 #List Definitions By Concept
